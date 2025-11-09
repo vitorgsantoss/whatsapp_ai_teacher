@@ -4,7 +4,7 @@ Este projeto é um bot de WhatsApp integrado com a API da OpenAI, projetado para
 
 ## Funcionalidades
 
-O bot é um tutor de inglês pessoal que pode:
+O bot é um tutor de inglês pessoal que fornece:
 
 *   **Tradução e Explicação:**
     *   Traduzir mensagens do inglês para o português.
@@ -39,7 +39,7 @@ Siga as instruções abaixo para configurar e executar o projeto em sua máquina
 
 Antes de começar, certifique-se de ter instalado:
 
-*   [Python 3.9+](https://www.python.org/downloads/)
+*   [Python 3.11+](https://www.python.org/downloads/)
 *   [Docker](https://docs.docker.com/get-docker/)
 *   [Docker Compose](https://docs.docker.com/compose/install/)
 
@@ -62,25 +62,25 @@ Antes de começar, certifique-se de ter instalado:
     *   `PHONE_NUMBER`: O número de telefone que o bot utilizará.
     *   `OPENAI_API_KEY`: Sua chave de API da OpenAI.
 
-3.  **Instale as dependências Python:**
-    É recomendado criar um ambiente virtual.
-    ```bash
-    python -m venv venv
-    source venv/bin/activate  # No Windows, use `venv\Scripts\activate`
-    pip install -r requirements.txt
-    ```
 
 ### Executando a Aplicação
 
 1.  **Inicie os serviços com Docker Compose:**
     Este comando irá iniciar os contêineres para a Evolution API, PostgreSQL e Redis.
     ```bash
-    docker-compose up -d
+    docker compose up --build
     ```
+2. **Crie a instancia do Evolution-API:**
+    *   Acesse: [Evolution API](http://localhost:8080/manager/)
 
-2.  **Inicie a aplicação FastAPI:**
-    ```bash
-    uvicorn app:app --host 0.0.0.0 --port 8000 --reload
-    ```
+    *   Crie a instancia do Evolution utilizando Baileys como Channel e informando o seu número de telefone.
+    *   Conecte no seu WhatsApp através do QRCode.
 
-A aplicação estará disponível em `http://localhost:8000`. Configure o webhook na sua instância da Evolution API para `http://seu-ip-publico:8000/webhook`.
+3. **Configure o webhook:**
+    *   Acesse as configurações da instância clicando na engrenagem presente no painel.
+    *   Acesse events/webhook no painel lateral.
+    *   Ative o webhook.
+    *   Altere a URL do webhook para http://bot:8000/webhook/.
+    *   Ative MESSAGE_UPSERT e salve as configurações.
+
+O agente estará disponível no seu WhatsApp, basta enviar uma mensagem para o seu próprio número.
