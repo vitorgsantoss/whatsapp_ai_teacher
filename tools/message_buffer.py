@@ -10,10 +10,12 @@ from tools.evolution_api import send_whatsapp_message
 redis_client = redis.Redis.from_url(REDIS_URL, decode_responses=True)
 debounce_tasks = defaultdict(asyncio.Task)
 
+
 def log(*args):
     print('[BUFFER]', *args)
 
-async def buffer_message(chat_id:str, message:str):
+
+async def buffer_message(chat_id: str, message: str):
     buffer_key = f'{chat_id}{BUFFER_KEY_SUFFIX}'
     await redis_client.rpush(buffer_key, f'user_role_{message}')
     await redis_client.expire(buffer_key, BUFFER_TTL)

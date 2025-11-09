@@ -13,10 +13,11 @@ def format_prompt(messages: list) -> list:
             msgs.append(AIMessage(content=text.strip()))
     return msgs
 
+
 async def translate_with_ai(messages_list: list) -> str:
     model = ChatOpenAI(
         model=OPENAI_MODEL_NAME,
         api_key=OPENAI_API_KEY
-    ) 
+    )
     response = await model.ainvoke(messages_list)
     return response.content

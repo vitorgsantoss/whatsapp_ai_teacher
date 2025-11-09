@@ -1,7 +1,7 @@
 import requests
 from tools.config import (
-    EVOLUTION_API_URL, 
-    EVOLUTION_INSTANCE_NAME, 
+    EVOLUTION_API_URL,
+    EVOLUTION_INSTANCE_NAME,
     EVOLUTION_AUTHENTICATION_API_KEY
 )
 
@@ -17,7 +17,7 @@ def send_whatsapp_message(group_id, text):
         "text": text
     }
     requests.post(
-        url=url, 
+        url=url,
         json=payload,
         headers=headers
     )
